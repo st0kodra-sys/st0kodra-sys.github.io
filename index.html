@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stiven Kodra Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Engineering portfolio of Stiven Kodra, Ph.D., mechanical engineer working in additive manufacturing, polymer extrusion and machine design.">
+<meta property="og:title" content="Stiven Kodra, Ph.D. | Engineering Portfolio">
+<meta property="og:description" content="Pellet extruder design, custom thermoset 3D printers, multi-material DfAM and polymer characterization.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://st0kodra-sys.github.io/img/screw-pellets.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: an engineering-drawing title block opens the page; projects follow as left-aligned spec sheets with figures on white plates. */
+:root {
+  --paper: #f4f6f7;
+  --ink: #17212a;
+  --muted: #56646f;
+  --hair: #cdd5db;
+  --frame: #17212a;
+  --accent: #1d4c9e;
+  --plate: #ffffff;
+  --display: "Barlow Semi Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  --measure: 68ch;
+  --wide: 1120px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f161c; --ink: #e3e9ed; --muted: #95a3ad; --hair: #2a3843;
+    --frame: #c3ced6; --accent: #86aaf0; --plate: #eef1f3; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f161c; --ink: #e3e9ed; --muted: #95a3ad; --hair: #2a3843;
+  --frame: #c3ced6; --accent: #86aaf0; --plate: #eef1f3; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 17px/1.6 var(--body);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+img { max-width: 100%; height: auto; display: block; }
+
+.wrap {
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+/* Nav */
+.nav { padding-block: 18px; }
+.nav .wrap { display: flex; flex-wrap: wrap; gap: 6px 22px; align-items: baseline; }
+.nav .mark { font: 600 1rem/1 var(--display); letter-spacing: .02em; color: var(--ink); text-decoration: none; margin-right: auto; }
+.nav a:not(.mark) { color: var(--muted); text-decoration: none; font-size: .95rem; }
+.nav a:not(.mark):hover { color: var(--ink); }
+
+/* Title block hero */
+.hero { padding-block: 12px 56px; }
+.titleblock {
+  border: 2px solid var(--frame);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.62fr);
+}
+.tb-main { padding: clamp(22px, 4vw, 44px); border-right: 1px solid var(--frame); min-width: 0; }
+.tb-main h1 {
+  font: 700 clamp(2.6rem, 7.2vw, 5.4rem)/0.92 var(--display);
+  letter-spacing: -0.01em;
+  margin: 0 0 18px;
+  text-wrap: balance;
+}
+.tb-main p { margin: 0; max-width: 46ch; font-size: 1.12rem; color: var(--ink); }
+.tb-img { display: grid; place-items: center; padding: 18px; background: var(--plate); min-width: 0; }
+.tb-img img { width: 100%; max-width: 420px; }
+.tb-fields {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--frame);
+}
+.tb-fields div { padding: 12px 16px 14px; border-right: 1px solid var(--frame); min-width: 0; }
+.tb-fields div:last-child { border-right: 0; }
+.tb-fields dt { font-size: .78rem; color: var(--muted); letter-spacing: .02em; margin-bottom: 2px; }
+.tb-fields dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 22px; align-items: center; }
+.btn {
+  display: inline-block; padding: 11px 18px; border: 2px solid var(--frame);
+  font: 600 1rem/1 var(--display); letter-spacing: .02em; color: var(--ink); text-decoration: none;
+}
+.btn:hover { background: var(--ink); color: var(--paper); }
+
+/* Projects */
+.project { padding-block: 64px; border-top: 1px solid var(--hair); }
+.project > .wrap > header { max-width: var(--measure); margin-bottom: 28px; }
+h2 {
+  font: 700 clamp(1.9rem, 4vw, 2.7rem)/1.05 var(--display);
+  margin: 0 0 8px; text-wrap: balance;
+}
+.where { color: var(--muted); margin: 0 0 18px; }
+.lead { font-size: 1.12rem; margin: 0; }
+h3 { font: 600 1.45rem/1.15 var(--display); margin: 0 0 4px; text-wrap: balance; }
+.cite { font-size: .93rem; color: var(--muted); margin: 0 0 14px; }
+
+.study {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 28px 44px;
+  padding-block: 32px;
+  border-top: 1px dashed var(--hair);
+}
+.study:first-of-type { border-top: 0; padding-top: 8px; }
+.study > div { min-width: 0; }
+.study p { margin: 0 0 14px; max-width: var(--measure); }
+
+/* Spec sheet */
+.spec { margin: 18px 0 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); border-top: 1px solid var(--ink); }
+.spec dt, .spec dd { padding: 7px 0; border-bottom: 1px solid var(--hair); margin: 0; }
+.spec dt { color: var(--muted); padding-right: 18px; font-size: .95rem; }
+.spec dd { font-weight: 500; }
+
+/* Figures */
+.figs { display: grid; gap: 14px; }
+.figs.two { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+figure { margin: 0; min-width: 0; }
+.plate { background: var(--plate); padding: 12px; border: 1px solid var(--hair); }
+.plate img { margin: 0 auto; }
+figcaption { font-size: .88rem; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+
+/* Generations table */
+.gens-scroll { overflow-x: auto; margin-top: 8px; }
+table.gens { border-collapse: collapse; width: 100%; min-width: 640px; font-size: .97rem; }
+.gens th, .gens td { text-align: left; vertical-align: top; padding: 9px 14px 9px 0; border-bottom: 1px solid var(--hair); }
+.gens thead th { font: 600 1.15rem/1.2 var(--display); border-bottom: 1px solid var(--ink); }
+.gens tbody th { color: var(--muted); font-weight: 400; white-space: nowrap; }
+
+/* Publications */
+.pubs ol { padding-left: 1.3em; margin: 0; max-width: 78ch; display: grid; gap: 12px; }
+.pubs li::marker { color: var(--muted); }
+.pubs .venue { font-style: italic; }
+
+footer { border-top: 2px solid var(--frame); padding-block: 36px 56px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 40px; justify-content: space-between; align-items: baseline; }
+footer h2 { font-size: 1.6rem; margin: 0; }
+footer p { margin: 0; color: var(--muted); }
+
+@media (max-width: 860px) {
+  .study { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 680px) {
+  body { font-size: 16px; }
+  .titleblock { grid-template-columns: minmax(0, 1fr); }
+  .tb-main { border-right: 0; border-bottom: 1px solid var(--frame); }
+  .tb-fields { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .tb-fields div:nth-child(2n) { border-right: 0; }
+  .tb-fields div:nth-child(-n+2) { border-bottom: 1px solid var(--frame); }
+  .tb-fields div:nth-child(3) { border-bottom: 1px solid var(--frame); border-right: 0; grid-column: 1 / -1; }
+  .tb-fields div:nth-child(4) { grid-column: 1 / -1; }
+  .nav a:not(.mark):not(.keep) { display: none; }
+  .figs.two { grid-template-columns: minmax(0, 1fr); }
+  .project { padding-block: 48px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="mark" href="#top">Stiven Kodra</a>
+    <a href="#phd">Pellet extruder</a>
+    <a href="#arme">ARME printers</a>
+    <a href="#inkbit">Inkbit 3D</a>
+    <a href="#epoxy">Epoxy cure DIC</a>
+    <a class="keep" href="#publications">Publications</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="titleblock">
+      <div class="tb-main">
+        <h1>Stiven Kodra, Ph.D.</h1>
+        <p>Mechanical engineer. I design and build extrusion hardware for additive manufacturing, characterize the polymers that run through it, and take parts from CAD to production.</p>
+      </div>
+      <div class="tb-img">
+        <img src="img/screw-pellets.png" width="539" height="316" alt="Machined stainless compact mixing screw lying in a pile of recycled plastic pellets">
+      </div>
+      <dl class="tb-fields">
+        <div><dt>Based in</dt><dd>Boston, MA</dd></div>
+        <div><dt>Education</dt><dd>Ph.D., M.S.E., B.S.E. Mechanical Engineering, UMass Lowell</dd></div>
+        <div><dt>Currently</dt><dd>Application Engineer, Inkbit 3D</dd></div>
+        <div><dt>Contact</dt><dd><a href="mailto:st0kodra@gmail.com">st0kodra@gmail.com</a></dd></div>
+      </dl>
+    </div>
+    <div class="hero-actions">
+      <a class="btn" href="Stiven_Kodra_Portfolio_2026.pdf">Download portfolio (PDF)</a>
+      <a href="https://www.linkedin.com/in/stiven-kodra">LinkedIn</a>
+      <a href="https://scholar.google.com/citations?user=gZyt3H8AAAAJ&amp;hl=en">Google Scholar</a>
+      <a href="#publications">7 peer-reviewed papers and a U.S. patent application</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="project" id="phd" aria-labelledby="phd-h">
+    <div class="wrap">
+      <header>
+        <h2 id="phd-h">Compact pellet extruder for sustainable fused granular fabrication</h2>
+        <p class="where">PhD research, UMass Lowell, 2022–2026. Funded by a U.S. Army SBIR Phase II through re:3D Inc.</p>
+        <p class="lead">A screw extruder small and light enough to ride on a desktop printer gantry, printing directly from recycled pellets instead of filament. The work ran from screw design through a 3 kg/hr scale-up to a feedforward controller that corrects extrusion lag in the G-code.</p>
+      </header>
+
+      <article class="study">
+        <div>
+          <h3>Compact mixing screw design and validation</h3>
+          <p class="cite">Kazmer &amp; Kodra, <i>Polymers</i> 2025. <a href="https://doi.org/10.3390/polym17020215">doi:10.3390/polym17020215</a></p>
+          <p>Seven SLS-printed screw sections varied flight count, helix angle and mixing-slot geometry. Non-isothermal CFD in SolidWorks Flow Simulation narrowed the field to a double-flighted 20° helix with counter-rotating mixing slots, which was then machined in 316 stainless and instrumented for output and energy use.</p>
+          <dl class="spec">
+            <dt>Length to diameter</dt><dd>8:1</dd>
+            <dt>Output, recycled PP</dt><dd>0.74 kg/hr at 40 RPM</dd>
+            <dt>Specific energy</dt><dd>0.264 kWh/kg HIPS, 0.344 kWh/kg rPP</dd>
+            <dt>Regression fit</dt><dd>Mass output R² = 0.977, SEC R² = 0.950</dd>
+            <dt>CFD vs. measured</dt><dd>Temperature within ~10 °C</dd>
+          </dl>
+        </div>
+        <div class="figs">
+          <div class="figs two">
+            <figure>
+              <div class="plate"><img src="img/screw-sections.jpg" width="352" height="281" alt="White SLS-printed prototype screw sections, numbered" loading="lazy"></div>
+              <figcaption>SLS prototype screw sections (PA12).</figcaption>
+            </figure>
+            <figure>
+              <div class="plate"><img src="img/screw-design-matrix.png" width="758" height="391" alt="Design matrix of seven screw geometries by flight count, helix angle and slot angle" loading="lazy"></div>
+              <figcaption>Seven-screw design matrix.</figcaption>
+            </figure>
+          </div>
+          <figure>
+            <div class="plate"><img src="img/mixing-cfd.png" width="1000" height="190" alt="CFD particle tracks along the mixing screw colored by temperature, 140 to 242 °C" loading="lazy"></div>
+            <figcaption>Particle tracking in the final screw, colored by melt temperature.</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="study">
+        <div>
+          <h3>31 mm scale-up and steady-state characterization</h3>
+          <p class="cite">Kodra et al., <i>Int. J. Adv. Manuf. Technol.</i> 2026, first author. <a href="https://doi.org/10.1007/s00170-026-17774-7">doi:10.1007/s00170-026-17774-7</a></p>
+          <p>A 31 mm version with four heating zones, a 20:1 planetary gearbox and an instrumented nozzle (melt pressure transducer and intrusive melt thermocouple). An 11-run factorial study across screw speed, barrel temperature and nozzle size, compared against an 829K-cell CFD model, showed that throughput and melt temperature can be controlled almost independently.</p>
+          <dl class="spec">
+            <dt>Throughput</dt><dd>3 kg/hr at 60 RPM</dd>
+            <dt>System mass</dt><dd>5.5 kg (gantry limit 10 kg)</dd>
+            <dt>Thermodynamic efficiency</dt><dd>76%</dd>
+            <dt>Speed → mass flow</dt><dd>0.84 g/min per RPM</dd>
+            <dt>Barrel → melt temp</dt><dd>1.1 °C per °C</dd>
+          </dl>
+        </div>
+        <div class="figs">
+          <figure>
+            <div class="plate"><img src="img/extruder-cad.png" width="598" height="430" alt="Section view of the 31 mm extruder, 244 mm long, with pressure transducer and melt thermocouple at the nozzle" loading="lazy"></div>
+            <figcaption>Extruder section with instrumented nozzle detail.</figcaption>
+          </figure>
+          <figure>
+            <div class="plate"><img src="img/gain-matrix.png" width="601" height="426" alt="Four plots of measured outlet temperature and mass flow against set temperature and screw speed" loading="lazy"></div>
+            <figcaption>Measured process gains: outlet temperature and mass flow vs. set temperature and screw speed.</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="study">
+        <div>
+          <h3>Transient characterization and feedforward control</h3>
+          <p class="cite">Kodra et al., <i>J. Manuf. Mater. Process.</i> 2026, first author. <a href="https://doi.org/10.3390/jmmp10080263">doi:10.3390/jmmp10080263</a></p>
+          <p>Pellet extruders lag behind the motion system, so roads start thin. I logged melt pressure, melt temperature and screw position at 100 Hz with a Python DAQ, measured printed road width from 600 DPI flatbed scans in MATLAB, and identified a first-order model of the extruder. The resulting compensator runs as a G-code post-processor, with no firmware changes.</p>
+          <dl class="spec">
+            <dt>Identified model</dt><dd>G(s) = 0.990 / (1 + 1.909s)</dd>
+            <dt>Feedstocks</dt><dd>Post-consumer rPP, 20 wt% wood-fiber PP</dd>
+            <dt>Latency, IQR</dt><dd>5–20 mm uncompensated, 2–8 mm compensated</dd>
+            <dt>Platform</dt><dd>4.7 kg head on a Creality CR-10S Pro</dd>
+          </dl>
+        </div>
+        <div class="figs">
+          <figure>
+            <div class="plate"><img src="img/system-diagram.png" width="725" height="408" alt="System diagram linking the re:3D control board, Klipper, Python DAQ and instrumented nozzle" loading="lazy"></div>
+            <figcaption>Control and data-acquisition architecture.</figcaption>
+          </figure>
+          <figure>
+            <div class="plate"><img src="img/road-width.png" width="936" height="506" alt="Four plots of road width along the print path, compensated runs reaching target width sooner than uncompensated" loading="lazy"></div>
+            <figcaption>Road width along the print path, uncompensated (orange) vs. compensated (blue).</figcaption>
+          </figure>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="project" id="arme" aria-labelledby="arme-h">
+    <div class="wrap">
+      <header>
+        <h2 id="arme-h">ARME: ram extruders for printing thermoset rubber</h2>
+        <p class="where">M.S. research, UMass Lowell, 2019–2022. NSF SHAP3D I/UCRC, grant IIP-1822147.</p>
+        <p class="lead">Fully compounded thermoset rubber is far too viscous for a filament extruder. The Additive Ram Material Extruder pushes it out of a heated barrel with a geared, lead-screw-driven piston, mounted on a modified desktop printer. I fabricated the first version and independently designed and built the next generations, including mechanics, electronics and firmware.</p>
+      </header>
+
+      <div class="figs two">
+        <figure>
+          <div class="plate"><img src="img/arme-v1.jpg" width="701" height="480" alt="CAD of the first ARME ram extruder head and the printer it mounts on" loading="lazy"></div>
+          <figcaption>ARME head and printer integration.</figcaption>
+        </figure>
+        <figure>
+          <div class="plate"><img src="img/arme-v3-v4.jpg" width="1067" height="504" alt="CAD of the larger dual-lead-screw ARME heads with NEMA 23 motors" loading="lazy"></div>
+          <figcaption>ARME 3XL and 4.0: dual lead screws, NEMA 23 drive, dual-material heads.</figcaption>
+        </figure>
+      </div>
+
+      <div class="gens-scroll">
+        <table class="gens">
+          <thead>
+            <tr><th scope="col"></th><th scope="col">v1</th><th scope="col">3XL (v2–v3)</th><th scope="col">4.0</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Key change</th><td>Proof of concept on a desktop printer</td><td>v2 core redesign: 0.02 mm piston clearance, dual seal grooves, titanium standoffs for thermal isolation; v3 scaled up to dual lead screws and a second, thermoplastic extruder</td><td>Two soft-material heads extruding in sync</td></tr>
+            <tr><th scope="row">Role</th><td>Co-designed with Prof. Kazmer, fabricated by me</td><td>Independent design and build</td><td>Independent design and build</td></tr>
+            <tr><th scope="row">Drive</th><td>NEMA 17, 50:1 gearbox, ACME ½-10 lead screw</td><td>NEMA 23, 50:1 gearbox, dual ACME ⅜-16 lead screws</td><td>Two NEMA 23 drives, 50:1, dual lead screws per head</td></tr>
+            <tr><th scope="row">Load cell</th><td>10 kN</td><td>5 kN</td><td>Two 5 kN, one per head</td></tr>
+            <tr><th scope="row">Max pressure</th><td>24 MPa</td><td>65 MPa (650 bar), 18.6 kN max force</td><td>65 MPa per head</td></tr>
+            <tr><th scope="row">Barrel capacity</th><td>—</td><td>15 cm³, 3× the earlier barrel</td><td>2 in³ (32.7 ml) per head</td></tr>
+            <tr><th scope="row">Materials</th><td>Thermoset rubber</td><td>Thermoset rubber plus thermoplastic filament for rigid support</td><td>Two soft materials, synchronized</td></tr>
+            <tr><th scope="row">Printer</th><td>Creality, E-axis reconfigured as a virtual 1.75 mm extruder</td><td>Ender 5 Pro, dual-material G-code</td><td>Custom gantry, still in use for university research</td></tr>
+            <tr><th scope="row">Published in</th><td><i>Polymer Composites</i> 2021</td><td><i>Polymers</i> 2025, <i>Micromachines</i> 2024</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="cite" style="margin-top:14px">Led to U.S. Patent Application 18/112,652, <i>Method and Apparatus for Additive Manufacturing of Thermoset Materials</i>.</p>
+    </div>
+  </section>
+
+  <section class="project" id="inkbit" aria-labelledby="inkbit-h">
+    <div class="wrap">
+      <header>
+        <h2 id="inkbit-h">Inkbit 3D: DfAM and failure analysis</h2>
+        <p class="where">Materials R&amp;D Associate 2022–2023, Application Engineer 2023–present. Medford, MA. Vision-controlled multi-material jetting.</p>
+      </header>
+      <article class="study">
+        <div>
+          <p>As the application engineer I take client parts from inquiry to delivery: converting injection-molded designs for multi-material jetting, designing mechanical interlocks between rigid and elastomeric materials, writing proposals and running print-and-test validation before production. This work generated approximately 20% of Inkbit's annual revenue.</p>
+          <p>On the materials team I used 2D digital image correlation for root-cause analysis on printed tensile specimens, separating true material failure from process artifacts so the process wasn't changed for the wrong reason.</p>
+          <dl class="spec">
+            <dt>Materials</dt><dd>TEPU 50A, Titan Tough 85</dd>
+            <dt>Methods</dt><dd>DfAM, multi-material interlocks, 2D-DIC, DSC, DMA, photo-rheology</dd>
+          </dl>
+        </div>
+        <div class="figs">
+          <figure>
+            <div class="plate"><img src="img/inkbit-parts.jpg" width="1025" height="558" alt="Four Inkbit demo parts: intake duct, edge seal, port cover and gasket, with materials listed" loading="lazy"></div>
+            <figcaption>Demo parts: TEPU duct and seal, rigid-plus-elastomer port cover and gasket.</figcaption>
+          </figure>
+          <div class="figs two">
+            <figure>
+              <div class="plate"><img src="img/dic-uniform.jpg" width="301" height="568" alt="DIC strain map of a tensile specimen with uniform low strain" loading="lazy"></div>
+              <figcaption>2D-DIC strain field, early loading.</figcaption>
+            </figure>
+            <figure>
+              <div class="plate"><img src="img/dic-localized.jpg" width="340" height="630" alt="DIC strain map showing strain localizing in the gauge section" loading="lazy"></div>
+              <figcaption>Strain localizing before failure.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="project" id="epoxy" aria-labelledby="epoxy-h">
+    <div class="wrap">
+      <header>
+        <h2 id="epoxy-h">In situ 3D-DIC of epoxy cure</h2>
+        <p class="where">Directed study with Dr. Marianna Maiaru, UMass Lowell, fall 2021. Hexion EPON 862 / Epikure 3234.</p>
+        <p class="lead">Can stereo DIC capture strain building up around a fiber while the matrix cures? A 10 mm carbon rod was cast in epoxy and imaged every 30 s for two to three hours while thermocouples logged resin and ambient temperature.</p>
+      </header>
+      <article class="study">
+        <div>
+          <p>Seven experiments across three container designs removed boundary effects and speckle failures. A MATLAB pipeline pulled peak major strain from each DIC stage and synced it to the temperature log.</p>
+          <dl class="spec">
+            <dt>Gelation</dt><dd>Sharp strain rise at ~70 min</dd>
+            <dt>Plateau</dt><dd>After ~98 min, near 80% of peak exotherm</dd>
+            <dt>Strain field</dt><dd>Concentrated at the rod interface</dd>
+            <dt>Cameras</dt><dd>Baumer FWX201 stereo pair, 2 MP, 12 mm</dd>
+          </dl>
+        </div>
+        <div class="figs">
+          <figure>
+            <div class="plate"><img src="img/epoxy-dic.jpg" width="989" height="642" alt="DIC major strain map around the embedded rod with strain history plot" loading="lazy"></div>
+            <figcaption>Major strain field around the embedded rod.</figcaption>
+          </figure>
+          <figure>
+            <div class="plate"><img src="img/epoxy-final.png" width="947" height="560" alt="Resin temperature, final strain map and average maximum strain per stage" loading="lazy"></div>
+            <figcaption>Resin exotherm, final strain map and strain history.</figcaption>
+          </figure>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="project pubs" id="publications" aria-labelledby="pubs-h">
+    <div class="wrap">
+      <header><h2 id="pubs-h">Publications and patent</h2><p class="where">Citations and full list on <a href="https://scholar.google.com/citations?user=gZyt3H8AAAAJ&amp;hl=en">Google Scholar</a>.</p></header>
+      <ol>
+        <li>Kodra, S., Kazmer, D.O., Mashburn, M., Gohl, E., &amp; Ferrell, P. (2026). Transient characterization and feedforward compensation in fused granular fabrication using post-consumer recycled and wood-filled polypropylenes. <span class="venue">Journal of Manufacturing and Materials Processing</span>, 10(8), 263. <a href="https://doi.org/10.3390/jmmp10080263">doi</a></li>
+        <li>Kodra, S., Drakas, W., Mashburn, M., Ferrell, P., &amp; Kazmer, D.O. (2026). Modeling and characterization of a plasticating extruder with a compact mixing screw. <span class="venue">International Journal of Advanced Manufacturing Technology</span>, 143(7–8), 3993–4008. <a href="https://doi.org/10.1007/s00170-026-17774-7">doi</a></li>
+        <li>Mubasshir, A.A., Kodra, S., Sangeetham, C., Kazmer, D.O., &amp; Mead, J.L. (2026). Impact of base rubber and cure systems in additive manufacturing of fully compounded thermoset elastomers. <span class="venue">Polymers</span>, 18(4), 540. <a href="https://doi.org/10.3390/polym18040540">doi</a></li>
+        <li>Diaz Armas, N., Bhandari, G., Kodra, S., Zhang, J., Kazmer, D., &amp; Mead, J. (2025). Additive manufacturing of thermoset elastomer–thermoplastic composites using dual-extrusion printing. <span class="venue">Polymers</span>, 17(13), 1800. <a href="https://doi.org/10.3390/polym17131800">doi</a></li>
+        <li>Kazmer, D.O., &amp; Kodra, S. (2025). Design, modeling, and validation of a compact, energy-efficient mixing screw for sustainable polymer processing. <span class="venue">Polymers</span>, 17(2), 215. <a href="https://doi.org/10.3390/polym17020215">doi</a></li>
+        <li>Periyasamy, M., Campbell, R., Mead, J.M., Kazmer, D.O., Banerjee, S., Mubasshir, A., Phaen, L.A., &amp; Kodra, S. (2024). A novel low-temperature extrusion method for the fused filament fabrication of fluoro-elastomer compounds. <span class="venue">Micromachines</span>, 15(5), 582. <a href="https://doi.org/10.3390/mi15050582">doi</a></li>
+        <li>Kazmer, D.O., Kodra, S., Mubasshir, A.A., Keaney, E.E., &amp; Mead, J.L. (2021). Additive ram material extrusion and diddling of fully compounded thermoset nitrile rubber. <span class="venue">Polymer Composites</span>, 42(10), 5237–5248. <a href="https://doi.org/10.1002/pc.26218">doi</a></li>
+        <li>U.S. Patent Application 18/112,652. Method and Apparatus for Additive Manufacturing of Thermoset Materials.</li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <h2>Get in touch</h2>
+    <p><a href="mailto:st0kodra@gmail.com">st0kodra@gmail.com</a> · <a href="https://www.linkedin.com/in/stiven-kodra">LinkedIn</a> · <a href="https://scholar.google.com/citations?user=gZyt3H8AAAAJ&amp;hl=en">Google Scholar</a> · <a href="Stiven_Kodra_Portfolio_2026.pdf">Portfolio PDF</a></p>
+  </div>
+</footer>
+</body>
+</html>
